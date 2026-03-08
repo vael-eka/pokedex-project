@@ -1,0 +1,6 @@
+Torchic, 5, Fire
+
+Squirtel, 5, Water
+
+
+
