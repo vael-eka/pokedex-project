@@ -1,29 +1,5 @@
 
-
-
-
-class Pokemon:
-    def __init__(self, name:str, poke_type:str, poke_stats:dict):
-        self.name: str = name
-        self.poke_type: str = poke_type
-        self.poke_stats: dict = poke_stats
-
-    @property
-    def stats_sum(self):
-        combat_values = [val for key, val in self.poke_stats.items() if key != "Level"]
-        return sum(combat_values)
-
-    def level_up(self):
-        self.poke_stats["Level"] += 1
-        print(f'{self.name} level up to level {self.poke_stats["Level"]}')
-
-    #I have to change this to make it worth it for all Pokemon
-    '''def evolving(self):
-        if self.poke_level >= 16:
-            print(f'{self.name} just evolved to Combusken!')
-            self.name = "Combusken"
-        else: pass'''
-
+from decorators import *
 
 class Pokedex:
     def __init__(self):
@@ -49,11 +25,7 @@ class Pokedex:
                 file.write(line)
         print(f"Pokedex saved successfully to {filename}!")
 
-    def get_by_type(self, type_name: str) -> list:
-        return [poke.name for poke in self.self_entries 
-                if poke.poke_type.lower().strip() == type_name.lower().strip()]
-
-''' def load_from_file(self, filename: str):
+    '''def load_from_file(self, filename: str):
         try:
             with open(filename, 'r') as file:
                 for line in file:
@@ -73,7 +45,38 @@ class Pokedex:
                 print("Data loaded back into the Dex!")
         except FileNotFoundError:
             print("No save file found. Starting fresh!")'''
+            
+
+    def get_by_type(self, type_name: str) -> list:
+        return [poke.name for poke in self.self_entries 
+                if poke.poke_type.lower().strip() == type_name.lower().strip()]
     
+
+class Pokemon:
+    def __init__(self, name:str, poke_type:str, poke_stats:dict):
+        self.name: str = name
+        self.poke_type: str = poke_type
+        self.poke_stats: dict = poke_stats
+
+    @property
+    def stats_sum(self):
+        combat_values = [val for key, val in self.poke_stats.items() if key != "Level"]
+        return sum(combat_values)
+
+    def level_up(self):
+        self.poke_stats["Level"] += 1
+        print(f'{self.name} level up to level {self.poke_stats["Level"]}')
+
+    @shout
+    def get_battle_cry(self):
+        return f"{self.name} I choose you!"
+
+    #I have to change this to make it worth it for all Pokemon
+    '''def evolving(self):
+        if self.poke_level >= 16:
+            print(f'{self.name} just evolved to Combusken!')
+            self.name = "Combusken"
+        else: pass'''  
 
 p1 = Pokemon("Bulbasur", "Grass",
              {"Level":5, "HP":45, "Attack":49, "Defense":49, "Sp.Atk":65, "Sp.Def":65, "Speed":45})
@@ -103,5 +106,5 @@ vael_pokedex.add_pokemon(p3)
 #vael_pokedex.save_to_file("Vael_Pokedex.txt")
 #print(f"Pokedex length: {len(vael_pokedex.self_entries)}")
 #print(vael_pokedex.get_by_type("Grass"))
-print(p1.stats_sum)
+print(p1.get_battle_cry())
 

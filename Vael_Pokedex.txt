@@ -1,6 +1,0 @@
-Bulbasur, Grass, {'Level': 6, 'HP': 45, 'Attack': 49, 'Defense': 49, 'Sp.Atk': 65, 'Sp.Def': 65, 'Speed': 45}
-
-Charizard, Fire, {'Level': 60, 'HP': 160, 'Attack': 100, 'Defense': 120, 'Sp.Atk': 170, 'Sp.Def': 140, 'Speed': 200}
-
-Darmanitan, Fire, {'Level': 30, 'HP': 120, 'Attack': 130, 'Defense': 70, 'Sp.Atk': 33, 'Sp.Def': 78, 'Speed': 97}
-
