@@ -6,6 +6,8 @@ class Pokedex:
     def __init__(self):
         self.self_entries: list = []
 
+
+    #Loads n Pokemon from a json file
     def load_from_json(self, filename="pokedex.json"):
         try:
             with open(filename, "r") as f:
@@ -19,6 +21,7 @@ class Pokedex:
         except FileNotFoundError:
             print("No archive found. Starting with a fresh Pokedex!")
 
+    #Saves the new Pokemon entries made here in the code to our json file
     def save_to_json(self, filename="pokedex.json"):
         data_to_save = []
         for poke in self.self_entries:
@@ -33,56 +36,37 @@ class Pokedex:
             json.dump(data_to_save, f, indent=4)
         print("Archives successfully saved to the Jedi Temple!")
 
+
     def add_pokemon(self, pokemon_obj: Pokemon):
         if not isinstance(pokemon_obj, Pokemon):
             raise TypeError("You can only add Pokemon objects to the Pokedex!")
         
         self.self_entries.append(pokemon_obj)
 
+    #Show all Pokemon in our Dex
     def show_all(self):
         for poke in self.self_entries:
             print(f"Name: {poke.name} | Type: {poke.poke_type} | Stats: {poke.poke_stats}")
-
-    def save_to_file(self, filename: str):
-        # 'w' means Write mode (it creates the file or overwrites it)
-        with open(filename, 'w') as file:
-            for poke in self.self_entries:
-                # We create a string for each pokemon
-                line = f"{poke.name}, {poke.poke_type}, {poke.poke_stats}\n\n"
-                file.write(line)
-        print(f"Pokedex saved successfully to {filename}!")
-
-    '''def load_from_file(self, filename: str):
-        try:
-            with open(filename, 'r') as file:
-                for line in file:
-                    # Clean the line
-                    clean_line = line.strip()
-
-                    if not clean_line:
-                        continue
-                    data = clean_line.split(',')
-                    # Check if we have all 3 pieces of data (Name, Level, Type)
-                    if len(data) < 3:
-                        print(f"Skipping messy line: {clean_line}")
-                        continue # Moves to the next line instead of crashing
-
-                    new_poke = Pokemon(data[0], data[1], data[])
-                    self.add_pokemon(new_poke)
-                print("Data loaded back into the Dex!")
-        except FileNotFoundError:
-            print("No save file found. Starting fresh!")'''
             
-
     def get_by_type(self, type_name: str):
         for pokemon in self.self_entries:
             if pokemon.poke_type.lower() == type_name.lower():
                 yield pokemon.name
 
+    #Get the most powerfull Pokes
     def get_elite(self, tresshold = 500):
         for pokemon in self.self_entries:
             if pokemon.stats_sum >= tresshold:
                 yield pokemon.name
+
+    def get_pokemon_type(self, name:str):
+        match = next((poke.poke_type for poke in self.self_entries if poke.name.lower() == name.lower()), None)
+
+        if match:
+            return f"The type of {name} is {match}."
+        else:
+            return "Pokemon not found in the archives."
+
 
     
 
@@ -155,8 +139,11 @@ p11 = Pokemon("Mawile", "Fairy",
 
 vael_pokedex = Pokedex()
 vael_pokedex.load_from_json()
-vael_pokedex.add_pokemon(p11)
-vael_pokedex.save_to_json()
+
+
+
+#vael_pokedex.add_pokemon(p11)
+#vael_pokedex.save_to_json()
 '''vael_pokedex.add_pokemon(p1)
 vael_pokedex.add_pokemon(p2)
 vael_pokedex.add_pokemon(p3)
@@ -172,7 +159,7 @@ vael_pokedex.add_pokemon(p10)'''
 
 #vael_pokedex.load_from_file("poke_update.txt")
 
-vael_pokedex.show_all()
+#vael_pokedex.show_all()
 #p1.level_up()
 #vael_pokedex.show_all()
 #vael_pokedex.save_to_file("Vael_Pokedex.txt")
@@ -195,3 +182,5 @@ vael_pokedex.show_all()
 
 #for name in boss_pokes:
 #    print(f"{name} is the most physical attacker with {max_val} Attack!")
+
+print(vael_pokedex.get_pokemon_type("Gengar"))

@@ -141,5 +141,18 @@
             "Sp.Def": 90,
             "Speed": 70
         }
+    },
+    {
+        "name": "Mawile",
+        "type": "Fairy",
+        "stats": {
+            "Level": 87,
+            "HP": 180,
+            "Attack": 200,
+            "Defense": 130,
+            "Sp.Atk": 95,
+            "Sp.Def": 90,
+            "Speed": 70
+        }
     }
 ]
