@@ -10,7 +10,6 @@ class Pokedex:
             raise TypeError("You can only add Pokemon objects to the Pokedex!")
         
         self.self_entries.append(pokemon_obj)
-        print(f"{pokemon_obj.name} has been added to the Pokedex!")
 
     def show_all(self):
         for poke in self.self_entries:
@@ -47,9 +46,16 @@ class Pokedex:
             print("No save file found. Starting fresh!")'''
             
 
-    def get_by_type(self, type_name: str) -> list:
-        return [poke.name for poke in self.self_entries 
-                if poke.poke_type.lower().strip() == type_name.lower().strip()]
+    def get_by_type(self, type_name: str):
+        for pokemon in self.self_entries:
+            if pokemon.poke_type.lower() == type_name.lower():
+                yield pokemon.name
+
+    def get_elite(self, tresshold = 500):
+        for pokemon in self.self_entries:
+            if pokemon.stats_sum >= tresshold:
+                yield pokemon.name
+
     
 
 class Pokemon:
@@ -87,6 +93,27 @@ p2 = Pokemon("Charizard", "Fire",
 p3 = Pokemon("Darmanitan", "Fire",
              {"Level": 30, "HP":120, "Attack":130, "Defense":70, "Sp.Atk":33, "Sp.Def":78, "Speed":97})
 
+p4 = Pokemon("Gengar", "Ghost", 
+             {"Level": 45, "HP": 130, "Attack": 65, "Defense": 60, "Sp.Atk": 130, "Sp.Def": 75, "Speed": 110})
+
+p5 = Pokemon("Lucario", "Fighting", 
+             {"Level": 36, "HP": 140, "Attack": 110, "Defense": 70, "Sp.Atk": 115, "Sp.Def": 70, "Speed": 90})
+
+p6 = Pokemon("Gyarados", "Water", 
+             {"Level": 52, "HP": 195, "Attack": 125, "Defense": 79, "Sp.Atk": 60, "Sp.Def": 100, "Speed": 81})
+
+p7 = Pokemon("Gardevoir", "Psychic", 
+             {"Level": 40, "HP": 138, "Attack": 65, "Defense": 65, "Sp.Atk": 125, "Sp.Def": 115, "Speed": 80})
+
+p8 = Pokemon("Reshiram", "Fire", 
+             {"Level": 55, "HP": 208, "Attack": 130, "Defense": 95, "Sp.Atk": 80, "Sp.Def": 85, "Speed": 102})
+
+p9 = Pokemon("Umbreon", "Dark", 
+             {"Level": 32, "HP": 195, "Attack": 65, "Defense": 110, "Sp.Atk": 60, "Sp.Def": 130, "Speed": 65})
+
+p10 = Pokemon("Metagross", "Steel", 
+             {"Level": 50, "HP": 180, "Attack": 135, "Defense": 130, "Sp.Atk": 95, "Sp.Def": 90, "Speed": 70})
+
 
 '''for level in range(11):
     p1.level_up()
@@ -97,6 +124,14 @@ vael_pokedex = Pokedex()
 vael_pokedex.add_pokemon(p1)
 vael_pokedex.add_pokemon(p2)
 vael_pokedex.add_pokemon(p3)
+vael_pokedex.add_pokemon(p4)
+vael_pokedex.add_pokemon(p5)
+vael_pokedex.add_pokemon(p6)
+vael_pokedex.add_pokemon(p7)
+vael_pokedex.add_pokemon(p8)
+vael_pokedex.add_pokemon(p9)
+vael_pokedex.add_pokemon(p10)
+
 
 #vael_pokedex.load_from_file("poke_update.txt")
 
@@ -105,6 +140,21 @@ vael_pokedex.add_pokemon(p3)
 #vael_pokedex.show_all()
 #vael_pokedex.save_to_file("Vael_Pokedex.txt")
 #print(f"Pokedex length: {len(vael_pokedex.self_entries)}")
-#print(vael_pokedex.get_by_type("Grass"))
-print(p1.get_battle_cry())
+#print(p1.get_battle_cry())
+#for item in vael_pokedex.get_by_type("ghost"):
+#   print(item)
 
+#for item in vael_pokedex.get_elite():
+#    print(f"{item} it's a beast!")
+
+glass_cannons = (p for p in vael_pokedex.self_entries if p.poke_stats["Attack"] > 100 and p.poke_stats["Defense"] < 80)
+
+#for cannon in glass_cannons:
+#    print(f"Danger: {cannon.name} has {cannon.poke_stats["Attack"]} but only {cannon.poke_stats["Defense"]} Defense!")
+
+max_val = max(p.poke_stats["Attack"] for p in vael_pokedex.self_entries)
+
+boss_pokes = (p.name for p in vael_pokedex.self_entries if p.poke_stats["Attack"] == max_val)
+
+for name in boss_pokes:
+    print(f"{name} is the most physical attacker with {max_val} Attack!")
