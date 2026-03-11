@@ -1,9 +1,37 @@
 
 from decorators import *
+import json
 
 class Pokedex:
     def __init__(self):
         self.self_entries: list = []
+
+    def load_from_json(self, filename="pokedex.json"):
+        try:
+            with open(filename, "r") as f:
+                raw_data = json.load(f)
+                self.self_entries = []
+
+            for item in raw_data:
+                new_poke = Pokemon(item['name'], item['type'], item['stats'])
+                self.add_pokemon(new_poke)
+            print(f"Restored {len(raw_data)} Pokemon from the archives.")
+        except FileNotFoundError:
+            print("No archive found. Starting with a fresh Pokedex!")
+
+    def save_to_json(self, filename="pokedex.json"):
+        data_to_save = []
+        for poke in self.self_entries:
+            poke_dict = {
+                "name":poke.name,
+                "type":poke.poke_type,
+                "stats":poke.poke_stats
+            }
+            data_to_save.append(poke_dict)
+
+        with open(filename, "w") as f:
+            json.dump(data_to_save, f, indent=4)
+        print("Archives successfully saved to the Jedi Temple!")
 
     def add_pokemon(self, pokemon_obj: Pokemon):
         if not isinstance(pokemon_obj, Pokemon):
@@ -114,6 +142,11 @@ p9 = Pokemon("Umbreon", "Dark",
 p10 = Pokemon("Metagross", "Steel", 
              {"Level": 50, "HP": 180, "Attack": 135, "Defense": 130, "Sp.Atk": 95, "Sp.Def": 90, "Speed": 70})
 
+p11 = Pokemon("Mawile", "Fairy", 
+             {"Level": 87, "HP": 180, "Attack": 200, "Defense": 130, "Sp.Atk": 95, "Sp.Def": 90, "Speed": 70})
+
+
+
 
 '''for level in range(11):
     p1.level_up()
@@ -121,7 +154,10 @@ p10 = Pokemon("Metagross", "Steel",
     print(f'Name: {p1.name} - Level: {p1.level}')'''
 
 vael_pokedex = Pokedex()
-vael_pokedex.add_pokemon(p1)
+vael_pokedex.load_from_json()
+vael_pokedex.add_pokemon(p11)
+vael_pokedex.save_to_json()
+'''vael_pokedex.add_pokemon(p1)
 vael_pokedex.add_pokemon(p2)
 vael_pokedex.add_pokemon(p3)
 vael_pokedex.add_pokemon(p4)
@@ -130,12 +166,13 @@ vael_pokedex.add_pokemon(p6)
 vael_pokedex.add_pokemon(p7)
 vael_pokedex.add_pokemon(p8)
 vael_pokedex.add_pokemon(p9)
-vael_pokedex.add_pokemon(p10)
+vael_pokedex.add_pokemon(p10)'''
+#vael_pokedex.save_to_json()
 
 
 #vael_pokedex.load_from_file("poke_update.txt")
 
-#vael_pokedex.show_all()
+vael_pokedex.show_all()
 #p1.level_up()
 #vael_pokedex.show_all()
 #vael_pokedex.save_to_file("Vael_Pokedex.txt")
@@ -147,14 +184,14 @@ vael_pokedex.add_pokemon(p10)
 #for item in vael_pokedex.get_elite():
 #    print(f"{item} it's a beast!")
 
-glass_cannons = (p for p in vael_pokedex.self_entries if p.poke_stats["Attack"] > 100 and p.poke_stats["Defense"] < 80)
+#glass_cannons = (p for p in vael_pokedex.self_entries if p.poke_stats["Attack"] > 100 and p.poke_stats["Defense"] < 80)
 
 #for cannon in glass_cannons:
 #    print(f"Danger: {cannon.name} has {cannon.poke_stats["Attack"]} but only {cannon.poke_stats["Defense"]} Defense!")
 
-max_val = max(p.poke_stats["Attack"] for p in vael_pokedex.self_entries)
+#max_val = max(p.poke_stats["Attack"] for p in vael_pokedex.self_entries)
 
-boss_pokes = (p.name for p in vael_pokedex.self_entries if p.poke_stats["Attack"] == max_val)
+#boss_pokes = (p.name for p in vael_pokedex.self_entries if p.poke_stats["Attack"] == max_val)
 
-for name in boss_pokes:
-    print(f"{name} is the most physical attacker with {max_val} Attack!")
+#for name in boss_pokes:
+#    print(f"{name} is the most physical attacker with {max_val} Attack!")

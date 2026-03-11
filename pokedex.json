@@ -1,0 +1,145 @@
+[
+    {
+        "name": "Bulbasur",
+        "type": "Grass",
+        "stats": {
+            "Level": 5,
+            "HP": 45,
+            "Attack": 49,
+            "Defense": 49,
+            "Sp.Atk": 65,
+            "Sp.Def": 65,
+            "Speed": 45
+        }
+    },
+    {
+        "name": "Charizard",
+        "type": "Fire",
+        "stats": {
+            "Level": 60,
+            "HP": 160,
+            "Attack": 100,
+            "Defense": 120,
+            "Sp.Atk": 170,
+            "Sp.Def": 140,
+            "Speed": 200
+        }
+    },
+    {
+        "name": "Darmanitan",
+        "type": "Fire",
+        "stats": {
+            "Level": 30,
+            "HP": 120,
+            "Attack": 130,
+            "Defense": 70,
+            "Sp.Atk": 33,
+            "Sp.Def": 78,
+            "Speed": 97
+        }
+    },
+    {
+        "name": "Gengar",
+        "type": "Ghost",
+        "stats": {
+            "Level": 45,
+            "HP": 130,
+            "Attack": 65,
+            "Defense": 60,
+            "Sp.Atk": 130,
+            "Sp.Def": 75,
+            "Speed": 110
+        }
+    },
+    {
+        "name": "Lucario",
+        "type": "Fighting",
+        "stats": {
+            "Level": 36,
+            "HP": 140,
+            "Attack": 110,
+            "Defense": 70,
+            "Sp.Atk": 115,
+            "Sp.Def": 70,
+            "Speed": 90
+        }
+    },
+    {
+        "name": "Gyarados",
+        "type": "Water",
+        "stats": {
+            "Level": 52,
+            "HP": 195,
+            "Attack": 125,
+            "Defense": 79,
+            "Sp.Atk": 60,
+            "Sp.Def": 100,
+            "Speed": 81
+        }
+    },
+    {
+        "name": "Gardevoir",
+        "type": "Psychic",
+        "stats": {
+            "Level": 40,
+            "HP": 138,
+            "Attack": 65,
+            "Defense": 65,
+            "Sp.Atk": 125,
+            "Sp.Def": 115,
+            "Speed": 80
+        }
+    },
+    {
+        "name": "Reshiram",
+        "type": "Fire",
+        "stats": {
+            "Level": 55,
+            "HP": 208,
+            "Attack": 130,
+            "Defense": 95,
+            "Sp.Atk": 80,
+            "Sp.Def": 85,
+            "Speed": 102
+        }
+    },
+    {
+        "name": "Umbreon",
+        "type": "Dark",
+        "stats": {
+            "Level": 32,
+            "HP": 195,
+            "Attack": 65,
+            "Defense": 110,
+            "Sp.Atk": 60,
+            "Sp.Def": 130,
+            "Speed": 65
+        }
+    },
+    {
+        "name": "Metagross",
+        "type": "Steel",
+        "stats": {
+            "Level": 50,
+            "HP": 180,
+            "Attack": 135,
+            "Defense": 130,
+            "Sp.Atk": 95,
+            "Sp.Def": 90,
+            "Speed": 70
+        }
+    },
+    {
+        "name": "Mawile",
+        "type": "Fairy",
+        "stats": {
+            "Level": 87,
+            "HP": 180,
+            "Attack": 200,
+            "Defense": 130,
+            "Sp.Atk": 95,
+            "Sp.Def": 90,
+            "Speed": 70
+        }
+    }
+]
