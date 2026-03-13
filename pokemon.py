@@ -1,6 +1,6 @@
 
 from decorators import *
-import json
+import json, os
 
 class Pokedex:
     def __init__(self):
@@ -9,17 +9,17 @@ class Pokedex:
 
     #Loads n Pokemon from a json file
     def load_from_json(self, filename="pokedex.json"):
-        try:
+        #Check the radar first!
+        if os.path.exists(filename):
             with open(filename, "r") as f:
                 raw_data = json.load(f)
                 self.self_entries = []
-
             for item in raw_data:
                 new_poke = Pokemon(item['name'], item['type'], item['stats'])
                 self.add_pokemon(new_poke)
-            print(f"Restored {len(raw_data)} Pokemon from the archives.")
-        except FileNotFoundError:
-            print("No archive found. Starting with a fresh Pokedex!")
+            #print(f"Restored {len(raw_data)} Pokemon from the archives.")
+        else:
+            print("Warning: Archive file not found. Creating a new DataBase")
 
     #Saves the new Pokemon entries made here in the code to our json file
     def save_to_json(self, filename="pokedex.json"):
@@ -42,22 +42,24 @@ class Pokedex:
             raise TypeError("You can only add Pokemon objects to the Pokedex!")
         
         self.self_entries.append(pokemon_obj)
+        self.save_to_json()
 
     #Show all Pokemon in our Dex
-    def show_all(self):
-        for poke in self.self_entries:
-            print(f"Name: {poke.name} | Type: {poke.poke_type} | Stats: {poke.poke_stats}")
+    def get_formatted_entries(self):
+        return (f"Name: {poke.name} - Type: {poke.poke_type} - Power: {poke.stats_sum}" for poke in self.self_entries)
+    
             
     def get_by_type(self, type_name: str):
-        for pokemon in self.self_entries:
-            if pokemon.poke_type.lower() == type_name.lower():
-                yield pokemon.name
+        return (poke.name for poke in self.self_entries if poke.poke_type.lower() == type_name.lower())
 
     #Get the most powerfull Pokes
-    def get_elite(self, tresshold = 500):
-        for pokemon in self.self_entries:
-            if pokemon.stats_sum >= tresshold:
-                yield pokemon.name
+    def get_elite_team(self, tresshold = 500):
+        return (poke for poke in self.self_entries if poke.stats_sum >= tresshold)
+
+    '''def get_elite(self, tresshold = 500):
+            for pokemon in self.self_entries:
+                if pokemon.stats_sum >= tresshold:
+                    yield pokemon.name'''
 
     def get_pokemon_type(self, name:str):
         match = next((poke.poke_type for poke in self.self_entries if poke.name.lower() == name.lower()), None)
@@ -66,6 +68,10 @@ class Pokedex:
             return f"The type of {name} is {match}."
         else:
             return "Pokemon not found in the archives."
+        
+    def remove_pokemon(self, name:str):
+        self.self_entries = [poke for poke in self.self_entries if poke.name.lower() != name.lower()]
+        self.save_to_json()
 
 
     
@@ -138,9 +144,8 @@ p11 = Pokemon("Mawile", "Fairy",
     print(f'Name: {p1.name} - Level: {p1.level}')'''
 
 vael_pokedex = Pokedex()
+
 vael_pokedex.load_from_json()
-
-
 
 #vael_pokedex.add_pokemon(p11)
 #vael_pokedex.save_to_json()
@@ -155,6 +160,12 @@ vael_pokedex.add_pokemon(p8)
 vael_pokedex.add_pokemon(p9)
 vael_pokedex.add_pokemon(p10)'''
 #vael_pokedex.save_to_json()
+
+
+vael_pokedex.remove_pokemon("Darmanitan")
+
+for poke in vael_pokedex.get_formatted_entries():
+    print(poke)
 
 
 #vael_pokedex.load_from_file("poke_update.txt")
@@ -183,4 +194,16 @@ vael_pokedex.add_pokemon(p10)'''
 #for name in boss_pokes:
 #    print(f"{name} is the most physical attacker with {max_val} Attack!")
 
-print(vael_pokedex.get_pokemon_type("Gengar"))
+#print(vael_pokedex.get_pokemon_type("Gengar"))
+
+'''entries = vael_pokedex.get_formatted_entries()
+found_any = False
+
+for poke in entries:
+    print(poke)
+    found_any = True
+
+if not found_any:
+    print("No Pokemon found in the database")'''
+
+

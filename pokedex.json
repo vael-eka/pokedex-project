@@ -26,19 +26,6 @@
         }
     },
     {
-        "name": "Darmanitan",
-        "type": "Fire",
-        "stats": {
-            "Level": 30,
-            "HP": 120,
-            "Attack": 130,
-            "Defense": 70,
-            "Sp.Atk": 33,
-            "Sp.Def": 78,
-            "Speed": 97
-        }
-    },
-    {
         "name": "Gengar",
         "type": "Ghost",
         "stats": {
@@ -123,32 +110,6 @@
             "Level": 50,
             "HP": 180,
             "Attack": 135,
-            "Defense": 130,
-            "Sp.Atk": 95,
-            "Sp.Def": 90,
-            "Speed": 70
-        }
-    },
-    {
-        "name": "Mawile",
-        "type": "Fairy",
-        "stats": {
-            "Level": 87,
-            "HP": 180,
-            "Attack": 200,
-            "Defense": 130,
-            "Sp.Atk": 95,
-            "Sp.Def": 90,
-            "Speed": 70
-        }
-    },
-    {
-        "name": "Mawile",
-        "type": "Fairy",
-        "stats": {
-            "Level": 87,
-            "HP": 180,
-            "Attack": 200,
             "Defense": 130,
             "Sp.Atk": 95,
             "Sp.Def": 90,
